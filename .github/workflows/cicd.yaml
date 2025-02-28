@@ -1,0 +1,42 @@
+name: Déploiement de l'application Hello
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Compilation du code
+        uses: actions/checkout@v3
+
+      - name: Authentification google cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Configuration GCP pour utiliser le artifact registery cree précedemment
+        run: gcloud auth configure-docker europe-west9-docker.pkg.dev
+
+      - name: Build de l'image Docker
+        run: |
+          docker build -t europe-west9-docker.pkg.dev/ctp-gcp/repo-docker-ctp-gcp/flask-app:latest .
+      
+      - name: Push de l'image Docker sur Artifact Registry
+        run: |
+          docker push europe-west9-docker.pkg.dev/ctp-gcp/repo-docker-ctp-gcp/flask-app:latest
+
+      - name: Déploiement avec Cloud Run
+        run: |
+          gcloud run deploy flask-app \
+            --image=europe-west9-docker.pkg.dev/ctp-gcp/repo-docker-ctp-gcp/flask-app:latest \
+            --platform=managed \
+            --region=europe-west1 \
+            --allow-unauthenticated
+
+      - name: Stocker sur votre bucket votre fichier DockerFile
+        run: |
+          gsutil cp Dockerfile gs://bucket_ctp/Dockerfile
