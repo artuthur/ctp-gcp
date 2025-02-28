@@ -115,3 +115,9 @@ Ensuite on crée la **clé de compte (JSON)** de service pour ce compte en prena
 
 Une fois ceci fait après un `git push` sur notre dépôt une pipeline CI/CD se lance poussant notre application dans le cloud.
 
+Image push sur le registry :
+
+![](img/image_push_registry.png)
+
+
+
