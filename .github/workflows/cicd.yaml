@@ -34,7 +34,7 @@ jobs:
           gcloud run deploy flask-app \
             --image=europe-west9-docker.pkg.dev/ctp-gcp/repo-docker-ctp-gcp/flask-app:latest \
             --platform=managed \
-            --region=europe-west1 \
+            --region=europe-west9 \
             --allow-unauthenticated
 
       - name: Stocker sur votre bucket votre fichier DockerFile
