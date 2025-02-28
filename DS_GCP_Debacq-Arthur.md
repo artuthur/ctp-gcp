@@ -113,3 +113,5 @@ On crée ensuite un **compte de service** pour le **Github Actions** avec les r�
 
 Ensuite on crée la **clé de compte (JSON)** de service pour ce compte en prenant garde à ne **pas la pousser sur Github** et a mettre les droits de lecture et ecriture uniquement pour l'utilisateur puis sur Github on l'**ajoute dans les secrets** de notre dépôt via le menu **Settings** et **Secrets and variables**.
 
+Une fois ceci fait après un `git push` sur notre dépôt une pipeline CI/CD se lance poussant notre application dans le cloud.
+
