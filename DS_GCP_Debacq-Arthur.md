@@ -119,5 +119,12 @@ Image push sur le registry :
 
 ![](img/image_push_registry.png)
 
+Déploiement sur le cloud Run :
 
+![](img/deploy_run_check.png)
 
+Malheureusement je n'arrive pas à sauvegarder mon DockerFile dans mon bucket, j'obtiens l'erreur suivante :
+
+``` 
+ServiceException: 401 Anonymous caller does not have storage.objects.list access to the Google Cloud Storage bucket. Permission 'storage.objects.list' denied on resource (or it may not exist).
+```
